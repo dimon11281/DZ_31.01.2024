@@ -80,9 +80,6 @@ class Trapezoid(Figure):
         return f"Трапеция имеет основание 1 - {self.footing1}, основание 2 - {self.footing2}, высоту - {self.height} и площадь - {self.__int__(self.footing1, self.footing2, self.height)}"
 
 
-
-
-
 # h1 = Rectangle()
 # h2 = Rectangle()
 # h3 = Rectangle()
@@ -92,14 +89,14 @@ class Trapezoid(Figure):
 # h1 = Triangle()
 # h2 = Triangle()
 # h3 = Triangle()
-h1 = Trapezoid()
-h2 = Trapezoid()
-h3 = Trapezoid()
-
-
-print(h1)
-print(h2)
-print(h3)
+# h1 = Trapezoid()
+# h2 = Trapezoid()
+# h3 = Trapezoid()
+#
+#
+# print(h1)
+# print(h2)
+# print(h3)
 
 
 
@@ -123,3 +120,45 @@ print(h3)
 Создайте список фигур, сохраните фигуры в файл,
 загрузите в другой список и отобразите информацию о
 каждой из фигур."""
+
+import json
+from pprint import pprint
+
+class Shape:
+
+    def __init__(self):
+        self.x = int(input("Введите точку х - "))
+        self.y = int(input("Введите точку у - "))
+        self.length_side =  int(input("Введите длину стороны - "))
+
+    def Show(self):
+        return f"Точка х - {self.x}, точка у - {self.y}, длина стороны квадрата - {self.length_side}"
+
+    def Save(self, data):
+        data = json.dumps(data)
+        data = json.loads(data)
+        with open("json.json", "w") as file:
+            json.dump(data, file, indent=4)
+
+    def Load(self):
+        with open("json.json", "r", encoding="utf-8") as file:
+            data = json.load(file)
+            pprint(data)
+
+class Square(Shape):
+    pass
+
+class Rectangle(Shape):
+    pass
+
+class Circle(Shape):
+    pass
+
+class Ellipse(Shape):
+    pass
+
+
+s1 = Square()
+# s1.Save(s1.__dict__)
+# print(Square.Load())
+s1.Load()
